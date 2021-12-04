@@ -5,11 +5,30 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 use function GuzzleHttp\Promise\all;
 
 class CarControllers extends Controller
 {
+
+    public function getCar(Request $request) {
+        if ($request->ajax()) {
+            $data = Car::with('siswa')->latest()->get();
+            return DataTables::of($data)
+            ->addIndexColumn()->addColumn('action', function($row){
+                $actionBtn = '<a class="btn btn-info btn-sm" href="' . route('ca.show',$row->id) . '">Show</a>
+                <a href="' . route('ca.edit',$row->id) . '" class="edit btn btn-success btn-sm">Edit</a>
+                <button class="btn btn-danger btn-sm btn-delete" data-remote="' . route('ca.destroy',$row->id) . '">Delete</button>';
+                return $actionBtn;
+            })->addColumn('NamaSiswa', function ($row){
+                return $row->siswa->NamaSiswa;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -72,7 +91,8 @@ class CarControllers extends Controller
      */
     public function edit(Car $ca)
     {
-        return view('ca.edit', compact('ca'));
+        $sisw = Siswa::all();
+        return view('ca.edit', compact('ca', 'sisw'));
     }
 
     /**

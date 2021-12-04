@@ -47,7 +47,7 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Jenis Kelamin:</strong>
+                <strong>Nama Siswa:</strong>
                 <select name="siswa_id" class="form-control">
                     <option value="">-- pilih Siswa --</option>
                     @foreach ($sisw as $sw)

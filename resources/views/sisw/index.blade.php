@@ -29,6 +29,7 @@
               {data: 'Alamat', name: 'Alamat'},
               {data: 'JenisKelamin', name: 'JenisKelamin'},
               {data: 'NoTelp', name: 'NoTelp'},
+              {data: 'cars', name: 'cars.Nama'},
               {
                   data: 'action', 
                   name: 'action', 
@@ -89,7 +90,7 @@
     @endif
     
     <div class="container mt-5">
-        <h1 class="mb-4 text-center">How to Use Yajra DataTables in Laravel 8</h1>
+        <h1 class="mb-4 text-center">Data Siswa</h1>
         <table id="datatable-siswa" class="table table-bordered">
             <thead>
                 <tr>
@@ -99,6 +100,7 @@
                     <th>Alamat</th>
                     <th>Jenis Kelamin</th>
                     <th>No Telp</th>
+                    <th>Mobil</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -107,57 +109,58 @@
             </tbody>
         </table>
     </div>
+@endsection
 
-    {{-- <form action="" method="GET">
-        <div class="container">
-            <div class="row">
-                <div class="input-group col-md-2">
-                    <input type="text" name="cari" class="form-control bg-light border-1 border-info small" placeholder="Cari Data" aria-level="Search" value="">
-                    <div class="input-group-append">
-                        <button class="btn btn-info float-right" type="submit">
-                            Cari
-                        </button>
+
+           
+        {{-- <form action="" method="GET">
+            <div class="container">
+                <div class="row">
+                    <div class="input-group col-md-2">
+                        <input type="text" name="cari" class="form-control bg-light border-1 border-info small" placeholder="Cari Data" aria-level="Search" value="">
+                        <div class="input-group-append">
+                            <button class="btn btn-info float-right" type="submit">
+                                Cari
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </form> --}}
+        </form> --}}
 
-    {{-- <table class="table table-bordered">
-        <tr>
-            <th width="20px" class="text-center">No</th>
-            <th>NIS</th>
-            <th width="280px"class="text-center">Nama Siswa</th>
-            <th width="280px"class="text-center">Alamat</th>
-            <th width="280px"class="text-center">Jenis Kelamin</th>
-            <th width="280px"class="text-center">No Telp</th>
-            <th width="280px"class="text-center">Action</th>
-        </tr>
-        @foreach ($sisw as $siswa)
-        <tr>
-            <td class="text-center">{{ ++$i }}</td>
-            <td>{!! $siswa->NIS !!}</td>
-            <td>{!! $siswa->NamaSiswa !!}</td>
-            <td>{!! $siswa->Alamat !!}</td>
-            <td>{!! $siswa->JenisKelamin !!}</td>
-            <td>{!! $siswa->NoTelp !!}</td>
-            <td class="text-center">
-                <form action="{{ route('sisw.destroy',$siswa->id) }}" method="POST">
+        {{-- <table class="table table-bordered">
+            <tr>
+                <th width="20px" class="text-center">No</th>
+                <th>NIS</th>
+                <th width="280px"class="text-center">Nama Siswa</th>
+                <th width="280px"class="text-center">Alamat</th>
+                <th width="280px"class="text-center">Jenis Kelamin</th>
+                <th width="280px"class="text-center">No Telp</th>
+                <th width="280px"class="text-center">Action</th>
+            </tr>
+            @foreach ($sisw as $siswa)
+            <tr>
+                <td class="text-center">{{ ++$i }}</td>
+                <td>{!! $siswa->NIS !!}</td>
+                <td>{!! $siswa->NamaSiswa !!}</td>
+                <td>{!! $siswa->Alamat !!}</td>
+                <td>{!! $siswa->JenisKelamin !!}</td>
+                <td>{!! $siswa->NoTelp !!}</td>
+                <td class="text-center">
+                    <form action="{{ route('sisw.destroy',$siswa->id) }}" method="POST">
 
-                   <a class="btn btn-info btn-sm" href="{{ route('sisw.show',$siswa->id) }}">Show</a>
+                    <a class="btn btn-info btn-sm" href="{{ route('sisw.show',$siswa->id) }}">Show</a>
 
-                    <a class="btn btn-primary btn-sm" href="{{ route('sisw.edit',$siswa->id) }}">Edit</a>
+                        <a class="btn btn-primary btn-sm" href="{{ route('sisw.edit',$siswa->id) }}">Edit</a>
 
-                    @csrf
-                    @method('DELETE')
+                        @csrf
+                        @method('DELETE')
 
-                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</button>
-                </form>
-            </td>
-        </tr>
-        @endforeach
-    </table>
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </table>
 
-    {!! $sisw->links() !!} --}}
-
-@endsection
+        {!! $sisw->links() !!} --}}

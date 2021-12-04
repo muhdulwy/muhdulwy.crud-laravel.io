@@ -43,5 +43,11 @@
                 {{ $sisw->NoTelp }}
             </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Mobil:</strong>
+                {{ $sisw->mobil }}
+            </div>
+        </div>
     </div>
 @endsection

@@ -4,9 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class SiswaController extends Controller
 {
+    public function getSiswa(Request $request) {
+        if ($request->ajax()) {
+            $data = Siswa::with('cars')->latest()->get();
+            return DataTables::of($data)
+            ->addIndexColumn()->addColumn('action', function($row){
+                $actionBtn = '<a class="btn btn-info btn-sm" href="' . route('sisw.show',$row->id) . '">Show</a>
+                <a href="' . route('sisw.edit',$row->id) . '" class="edit btn btn-success btn-sm">Edit</a>
+                <button class="btn btn-danger btn-sm btn-delete" data-remote="' . route('sisw.destroy',$row->id) . '">Delete</button>';
+                return $actionBtn;
+            })->addColumn('cars', function ($row){
+                if (!empty($row->cars)) {
+                    return $row->cars->map(function($ca){
+                        return $ca->Nama;
+                    })->implode('<br>');
+                }
+
+                return null;
+            })
+            ->rawColumns(['action', 'cars'])
+            ->make(true);
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -70,6 +94,12 @@ class SiswaController extends Controller
      */
     public function show(Siswa $sisw)
     {
+        $sisw->load('cars');
+
+        $sisw->mobil = $sisw->cars->map(function($ca){
+            return $ca->Nama;
+        })->implode(', ');
+
         return view('sisw.show', compact('sisw'));
     }
 
